@@ -4,7 +4,7 @@ import { MenuContext } from './Menu'
 import { MenuItemProps } from './MenuItem';
 
 interface SubMenuProps {
-  index?: number;
+  index?: string;
   title: string;
   className?: string;
 }
@@ -12,9 +12,11 @@ interface SubMenuProps {
 const SubMenu: React.FC<SubMenuProps> = (props) => {
   const {index, title, className, children } = props;
   const context = useContext(MenuContext)
-  const [opened, setOpen] = useState(false)
+  const defaultOpenedMenus = context.defaultOpenedMenus || [];
+  const isOpened = (index && context.mode === 'vertical') ? defaultOpenedMenus.includes(index) : false
+  const [opened, setOpen] = useState(isOpened)
   const classes = classnames('submenu-item menu-item', className, {
-    'is-active': context.index === index
+    'is-active': context.index?.includes(index as string)
   })
 
   const submenuClasses = classnames('wader-submenu', {
@@ -47,7 +49,9 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     const childrenElement = React.Children.map(children, (child, i) => {
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       if (childElement.type.displayName === 'MenuItem') {
-        return childElement;
+        return React.cloneElement(childElement, {
+          index: `${index}-${i}`
+        });
       } else {
         console.error('error node');
       }

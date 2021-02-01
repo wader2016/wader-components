@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Menu mode="vertical" onSelect={e => alert(e)}>
+        <Menu onSelect={e => alert(e)} defaultOpenedMenus={['3']}>
           <MenuItem>
             item 1
           </MenuItem>

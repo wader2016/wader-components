@@ -3,24 +3,26 @@ import classnames from 'classnames';
 import { MenuItemProps } from './MenuItem';
 
 interface MenuProps {
-  defaultIndex?: number;
+  defaultIndex?: string;
   className?: string;
   mode?: 'horizonal' | 'vertical';
   style?: React.CSSProperties;
   children?: React.ReactNode;
-  onSelect?: (selectedIndex: number) => void;
+  onSelect?: (selectedIndex: string) => void;
+  defaultOpenedMenus?: string[];
 }
 
 interface IMenuContext {
-  index?: number;
-  onSelect?: (selectedIndex: number) => void;
+  index?: string;
+  onSelect?: (selectedIndex: string) => void;
   mode?: 'horizonal' | 'vertical';
+  defaultOpenedMenus?: string[];
 }
 
-export const MenuContext = createContext<IMenuContext>({index: 0});
+export const MenuContext = createContext<IMenuContext>({index: '0'});
 
 const Menu: React.FC<MenuProps> = (props) => {
-  const { defaultIndex, className, mode, style, children, onSelect } = props;
+  const { defaultIndex, className, mode, style, children, onSelect, defaultOpenedMenus } = props;
   const classes = classnames('wader-menu', className, {
     'menu-vertical': mode === 'vertical',
     'menu-horizonal': mode !== 'vertical'
@@ -28,7 +30,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 
   const [activeIndex, setActiveIndex] = useState(defaultIndex);
 
-  const handleClick = (index: number) => {
+  const handleClick = (index: string) => {
     setActiveIndex(index);
     if (onSelect) {
       onSelect(index);
@@ -36,9 +38,10 @@ const Menu: React.FC<MenuProps> = (props) => {
   }
 
   const passProps: IMenuContext = {
-    index: activeIndex ? activeIndex : 0,
+    index: activeIndex ? activeIndex : '0',
     onSelect: handleClick,
-    mode: mode
+    mode,
+    defaultOpenedMenus
   }
 
   const renderChildren = () => {
@@ -47,7 +50,7 @@ const Menu: React.FC<MenuProps> = (props) => {
       const { displayName } = childElement.type
       if (displayName === 'MenuItem' || displayName === 'SubMenu') {
         return React.cloneElement(childElement, {
-          index
+          index: index.toString()
         })
       } else {
         console.error('error node');
@@ -65,7 +68,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 }
 
 Menu.defaultProps = {
-  defaultIndex: 0,
+  defaultIndex: '0',
   mode: 'horizonal'
 }
 
