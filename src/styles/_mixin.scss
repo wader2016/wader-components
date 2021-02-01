@@ -1,0 +1,36 @@
+@mixin btn-size($padding-y, $padding-x, $font-size, $border-radius) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  border-radius: $border-radius;
+}
+
+@mixin btn-style(
+  $background,
+  $border-color,
+  $color,
+  $hover-background: lighten($background, 7.5%),
+  $hover-border-color: lighten($border-color, 10%),
+  $hover-color: $color
+) {
+  color: $color;
+  background: $background;
+  border-color: $border-color;
+  &:hover {
+    color: $hover-color;
+    background: $hover-background;
+    border-color: $hover-border-color;
+  }
+  &:focus,
+  &.focus {
+    color: $hover-color;
+    background: $hover-background;
+    border-color: $hover-border-color;
+    outline: none; // 去除默认样式黑色边框
+  }
+  &:disabled,
+  &.disabled {
+    color: $color;
+    background: $background;
+    border-color: $border-color;
+  }
+}
