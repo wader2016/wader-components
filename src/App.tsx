@@ -1,16 +1,24 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import Menu from './components/Menu/Menu';
 import MenuItem from './components/Menu/MenuItem';
 import SubMenu from './components/Menu/SubMenu';
+import Icon from './components/Icon/icon';
+
+library.add(fas);
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <hr/>
+        <Icon icon="coffee" theme="primary" />
+        <hr/>
         <Menu onSelect={e => alert(e)} defaultOpenedMenus={['3']}>
           <MenuItem>
             item 1

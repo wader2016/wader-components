@@ -28,6 +28,15 @@
       display: flex;
       align-items: center;
     }
+    .icon-down {
+      margin-left: 4px;
+      transition: transform 0.25s ease-in-out;
+    }
+    &:hover {
+      .icon-down {
+        transform: rotate(180deg);
+      }
+    }
   }
   
   .wader-submenu {
@@ -43,6 +52,18 @@
       &.is-active, &:hover {
         color: $menu-item-active-color;
       }
+    }
+  }
+  // 纵向模式 禁止旋转
+  .is-vertical {
+    .icon-down {
+      transform: rotate(0deg) !important;
+    }
+  }
+  // 纵向模式 且是打开状态，添加动画效果
+  .is-vertical.is-opened {
+    .icon-down {
+      transform: rotate(180deg) !important;
     }
   }
   .wader-submenu.menu-opened {
