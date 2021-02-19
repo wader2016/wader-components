@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import Button, { ButtonType, ButtonSize } from './components/Button/button';
+import Button from './components/Button/button';
 import Menu from './components/Menu/Menu';
 import MenuItem from './components/Menu/MenuItem';
 import SubMenu from './components/Menu/SubMenu';
@@ -43,15 +43,15 @@ function App() {
         </Menu>
         <hr />
         <div>
-          <Button size={ButtonSize.Small}>default</Button>
+          <Button size='sm'>default</Button>
           <Button>default</Button>
           <Button disabled>default</Button>
-          <Button size={ButtonSize.Large}>Large Button</Button>
-          <Button btnType={ButtonType.Primary}>Primary</Button>
-          <Button btnType={ButtonType.Danger}>Danger</Button>
-          <Button btnType={ButtonType.Primary} disabled>Primary disabled</Button>
-          <Button btnType={ButtonType.Link} href='#/' disabled={true}>Link disabled</Button>
-          <Button btnType={ButtonType.Link} href='#/'>Link</Button>
+          <Button size='lg'>Large Button</Button>
+          <Button btnType='primary'>Primary</Button>
+          <Button btnType='danger'>Danger</Button>
+          <Button btnType='primary' disabled>Primary disabled</Button>
+          <Button btnType='link' href='#/' disabled={true}>Link disabled</Button>
+          <Button btnType='link' href='#/'>Link</Button>
         </div>
       </header>
     </div>
